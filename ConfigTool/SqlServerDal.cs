@@ -35,5 +35,24 @@ namespace ConfigTool
             SqlCommand cmd = new SqlCommand(SqlServerDal.SP_UPDATE_CONFIG_TABLE);
             cmd.CommandType = CommandType.StoredProcedure;
         }
+
+
+        private void update(SqlCommand cmd)
+        {
+            /* Set up connection */
+            SqlConnection conn = new SqlConnection(this.connstr);
+            cmd.Connection = conn;
+
+            /* OPEN CONNECTION */
+            conn.Open();
+
+
+            /* Execute the stored procedure */
+            int rowsAffected = cmd.ExecuteNonQuery();
+
+
+            /* CLOSE CONNECTION */
+            conn.Close();
+        }
     }
 }

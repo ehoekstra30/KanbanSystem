@@ -54,11 +54,11 @@ namespace ConfigTool
         {
             //first time setup of connection...
             // use the configuration manager
-            switch (ConfigurationManager.ConnectionStrings["BENZSERVER-fdms"].ProviderName)
+            switch (ConfigurationManager.ConnectionStrings["kanban"].ProviderName)
             {
                 case "System.Data.SqlClient":
                     Dbms.dal = new SqlServerDal(
-                        ConfigurationManager.ConnectionStrings["BENZSERVER-fdms"].ConnectionString);
+                        ConfigurationManager.ConnectionStrings["kanban"].ConnectionString);
                     break;
                 default:
                     Dbms.dal = new NullDal();
