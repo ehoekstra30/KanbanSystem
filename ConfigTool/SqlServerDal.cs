@@ -82,7 +82,27 @@ namespace ConfigTool
 
         public override ConfigModel GetAllConfigurationDetails()
         {
-            return new ConfigModel();
+            SqlCommand cmd = new SqlCommand(SqlServerDal.SELECT_ALL_CONFIG_TABLE);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            return new ConfigModel(this.select(cmd));
+        }
+
+
+        private DataTable select(SqlCommand cmd)
+        {
+            SqlConnection conn = new SqlConnection(this.connstr);
+            cmd.Connection = conn;
+
+            conn.Open();
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(reader);
+
+            conn.Close();
+
+            return dt;
         }
 
 
