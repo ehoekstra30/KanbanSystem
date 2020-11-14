@@ -9,5 +9,6 @@ namespace ConfigTool
     public abstract class AbstractDal
     {
         public abstract void UpdateConfiguration(ConfigModel cm);
+        public abstract ConfigModel GetAllConfigurationDetails();
     }
 }

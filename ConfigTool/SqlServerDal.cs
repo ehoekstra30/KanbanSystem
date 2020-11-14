@@ -21,6 +21,8 @@ namespace ConfigTool
             "@AssemblyTime @RookieVariance @ExperiencedVariance " +
             "@SeniorVariance @RookieSpeed @ExperiencedSpeed @SeniorSpeed " +
             "@TrayCap; ";
+        private static string SELECT_ALL_CONFIG_TABLE =
+            "SELECT * FROM ConfigTable; ";
 
 
         /* !!! CONSTRUCTOR !!! */
@@ -34,6 +36,14 @@ namespace ConfigTool
         {
             SqlCommand cmd = new SqlCommand(SqlServerDal.SP_UPDATE_CONFIG_TABLE);
             cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@HarnessCap", cm.HarnessBinCapacity);
+        }
+
+
+        public override ConfigModel GetAllConfigurationDetails()
+        {
+            return new ConfigModel();
         }
 
 
