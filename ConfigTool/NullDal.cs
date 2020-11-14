@@ -12,5 +12,10 @@ namespace ConfigTool
         {
             // do nothing;
         }
+
+        public override ConfigModel GetAllConfigurationDetails()
+        {
+            return new ConfigModel();
+        }
     }
 }

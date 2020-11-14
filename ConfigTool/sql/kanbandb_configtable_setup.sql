@@ -41,3 +41,57 @@ values
 	('SeniorAssemblySpeed', '60'),
 	
 	('TestTrayCapacity', '60');
+
+
+
+create procedure sp_UpdateConfigTable 
+	@HarnessCap as varchar(24), @ReflectorCap as varchar(24), @HousingCap as varchar(24),
+	@LensCap as varchar(24), @BulbCap as varchar(24), @BezelCap as varchar(24),
+	@HarnessMin as varchar(24), @ReflectorMin as varchar(24), @HousingMin as varchar(24),
+	@LensMin as varchar(24), @BulbMin as varchar(24), @BezelMin as varchar(24),
+	@RunnerFreq as varchar(24), @Tick as varchar(24), @NumStations as varchar(24),
+	@RookieDefect as varchar(24), @ExperiencedDefect as varchar(24), @SeniorDefect as varchar(24),
+	@AssemblyTime as varchar(24),
+	@RookieVariance as varchar(24), @ExperiencedVariance as varchar(24), @SeniorVariance as varchar(24),
+	@RookieSpeed as varchar(24), @ExperiencedSpeed as varchar(24), @SeniorSpeed as varchar(24),
+	@TrayCap as varchar(24)
+as
+begin
+	truncate table ConfigTable;
+
+	insert into ConfigTable 
+	(SystemProperty, SystemValue) 
+values 
+	('HarnessCapacity', @HarnessCap),
+	('ReflectorCapacity', @ReflectorCap),
+	('HousingCapacity', @HousingCap),
+	('LensCapacity', @LensCap),
+	('BulbCapacity', @BulbCap),
+	('BezelCapacity', @BezelCap),
+
+	('HarnessMinimum', @HarnessMin),
+	('ReflectorMinimum', @ReflectorMin),
+	('HousingMinimum', @HousingMin),
+	('LensMinimum', @LensMin),
+	('BulbMinimum', @BulbMin),
+	('BezelMinimum', @BezelMin),
+	
+	('RunnerFrequency', @RunnerFreq),
+	('TickTime', @Tick),
+	('NumberOfAssemblyStations', @NumStations),
+
+	('RookieDefectRate', @RookieDefect),
+	('ExperiencedDefectRate', @ExperiencedDefect),
+	('SeniorDefectRate', @SeniorDefect),
+	
+	('AssemblyBaseTime', @AssemblyTime),
+	('RookieAssemblyTimeVariance', @RookieVariance),
+	('ExperiencedAssemblyTimeVariance', @ExperiencedVariance),
+	('SeniorAssemblyTimeVariance', @SeniorVariance),
+
+	('RookieAssemblySpeed', @RookieSpeed),
+	('ExperiencedAssemblySpeed', @ExperiencedSpeed),
+	('SeniorAssemblySpeed', @SeniorSpeed),
+	
+	('TestTrayCapacity', @TrayCap);
+end

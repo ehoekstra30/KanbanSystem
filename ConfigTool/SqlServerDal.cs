@@ -37,7 +37,46 @@ namespace ConfigTool
             SqlCommand cmd = new SqlCommand(SqlServerDal.SP_UPDATE_CONFIG_TABLE);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@HarnessCap", cm.HarnessBinCapacity);
+
+
+            // SET ALL PARAMETERS
+            cmd.Parameters.AddWithValue("@HarnessCap", cm.HarnessBinCapacity.ToString());
+            cmd.Parameters.AddWithValue("@ReflectorCap", cm.ReflectorBinCapacity.ToString());
+            cmd.Parameters.AddWithValue("@HousingCap", cm.HousingBinCapacity.ToString());
+            cmd.Parameters.AddWithValue("@LensCap", cm.LensBinCapacity.ToString());
+            cmd.Parameters.AddWithValue("@BulbCap", cm.BulbBinCapacity.ToString());
+            cmd.Parameters.AddWithValue("@BezelCap", cm.BezelBinCapacity.ToString());
+
+            cmd.Parameters.AddWithValue("@HarnessMin", cm.HarnessBinMinimum.ToString());
+            cmd.Parameters.AddWithValue("@ReflectorMin", cm.ReflectorBinMinimum.ToString());
+            cmd.Parameters.AddWithValue("@HousingMin", cm.HousingBinMinimum.ToString());
+            cmd.Parameters.AddWithValue("@LensMin", cm.LensBinMinimum.ToString());
+            cmd.Parameters.AddWithValue("@BulbMin", cm.BulbBinMinimum.ToString());
+            cmd.Parameters.AddWithValue("@BezelMin", cm.BezelBinMinimum.ToString());
+
+            cmd.Parameters.AddWithValue("@RunnerFreq", cm.RunnerFrequency.ToString());
+            cmd.Parameters.AddWithValue("@Tick", cm.SecondsPerTick.ToString());
+            cmd.Parameters.AddWithValue("@NumStations", cm.NumAssemblyStations.ToString());
+
+            cmd.Parameters.AddWithValue("@RookieDefect", cm.RookieDefectRate.ToString());
+            cmd.Parameters.AddWithValue("@ExperiencedDefect", cm.ExperiencedDefectRate.ToString());
+            cmd.Parameters.AddWithValue("@SeniorDefect", cm.SeniorDefectRate.ToString());
+
+            cmd.Parameters.AddWithValue("@AssemblyTime", cm.AssemblyBaseTime.ToString());
+            cmd.Parameters.AddWithValue("@RookieVariance", cm.RookieAssemblyTimeVariance.ToString());
+            cmd.Parameters.AddWithValue("@ExperiencedVariance", cm.ExperiencedAssemblyTimeVariance.ToString());
+            cmd.Parameters.AddWithValue("@SeniorVariance", cm.SeniorAssemblyTimeVariance.ToString());
+
+            cmd.Parameters.AddWithValue("@RookieSpeed", cm.RookieAssemblySpeed.ToString());
+            cmd.Parameters.AddWithValue("@ExperiencedSpeed", cm.ExperiencedAssemblySpeed.ToString());
+            cmd.Parameters.AddWithValue("@SeniorSpeed", cm.SeniorAssemblySpeed.ToString());
+
+            cmd.Parameters.AddWithValue("@TrayCap", cm.TestTrayCapacity.ToString());
+
+
+
+
+            this.update(cmd);
         }
 
 
