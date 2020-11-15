@@ -83,6 +83,6 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button Content="Update Settings" HorizontalAlignment="Left" Margin="430,289,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button  Name ="UpdateBtn" Content="Update Settings" HorizontalAlignment="Left" Margin="430,289,0,0" VerticalAlignment="Top" Width="100" Click="UpdateBtn_Click"/>
     </Grid>
 </Window>

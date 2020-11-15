@@ -17,10 +17,6 @@ using System.Windows.Shapes;
 
 namespace ConfigTool
 {
-
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
 
@@ -61,6 +57,7 @@ namespace ConfigTool
         private static string dNumberOfStations = "3";
 
 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -68,18 +65,46 @@ namespace ConfigTool
 
             string constr = ConfigurationManager.ConnectionStrings["kanban"].ConnectionString;
 
+            SqlConnection connection = null;
             try
             {
-                SqlConnection connection = new SqlConnection("data source= .;database=Index_demo;integrated security=SSPI");
+                connection = new SqlConnection("data source= .;database=Index_demo;integrated security=SSPI");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Cannot connect to " + dbName + "database\n" + ex.ToString(), "Error");
                 return;
             }
+
+            connection.Close();
+
+
+            
         }
 
 
+        //FUNCTION      : UpdateBtn_Click
+        //DESCRIPTION   : This button click function attempts to update the db with the given
+        //                parameters stored in text boxes.
+        private void UpdateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SqlServerDal dal = new SqlServerDal(dbName);
+
+            ConfigModel config = new ConfigModel();
+
+
+            //fill the config model with parameters
+
+            dal.UpdateConfiguration(config);
+
+            MessageBox.Show("Database successfully updated","Yep");
+            return;
+        }
+
+
+
+        //FUNCTION      : UpdateBoxes
+        //DESCRIPTION   : Places default values in the text boxes for the user.
         public int UpdateBoxes()
         {
 
