@@ -95,7 +95,16 @@ namespace ConfigTool
 
             //fill the config model with parameters
 
-            dal.UpdateConfiguration(config);
+            try
+            {
+                dal.UpdateConfiguration(config);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Nope");
+                return;
+            }
+
 
             MessageBox.Show("Database successfully updated","Yep");
             return;
