@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ConfigTool
 {
+    //CLASS     : SqlServerDal
     public class SqlServerDal : AbstractDal
     {
         private string connstr;

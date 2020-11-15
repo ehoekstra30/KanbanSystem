@@ -20,17 +20,17 @@
                     <Label Content="Failure Rate" HorizontalAlignment="Left" Margin="195,10,0,0" VerticalAlignment="Top" Height="26" Width="90"/>
                     <Label Content="Variance" HorizontalAlignment="Left" Margin="295,10,0,0" VerticalAlignment="Top" Height="26" Width="90"/>
 
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="100,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" />
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="100,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" />
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="100,104,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95"/>
+                    <TextBox Name="newSpeed" HorizontalAlignment="Left" Height="20" Margin="101,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" />
+                    <TextBox Name="expSpeed" HorizontalAlignment="Left" Height="20" Margin="100,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" />
+                    <TextBox Name="superSpeed" HorizontalAlignment="Left" Height="20" Margin="100,104,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95"/>
 
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="200,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" />
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="200,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" />
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="200,104,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95"/>
+                    <TextBox Name="newFailure" HorizontalAlignment="Left" Height="20" Margin="200,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" />
+                    <TextBox Name="expFailure" HorizontalAlignment="Left" Height="20" Margin="200,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" />
+                    <TextBox Name="superFailure" HorizontalAlignment="Left" Height="20" Margin="200,104,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95"/>
 
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="300,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" />
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="300,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" />
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="300,104,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95"/>
+                    <TextBox Name="newVariance" HorizontalAlignment="Left" Height="20" Margin="300,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" />
+                    <TextBox Name="expVariance" HorizontalAlignment="Left" Height="20" Margin="300,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" />
+                    <TextBox Name="superVariance" HorizontalAlignment="Left" Height="20" Margin="300,104,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95"/>
 
 
 
@@ -49,19 +49,19 @@
                     <Label Content="Starting Capacity" HorizontalAlignment="Left" Margin="77.931,10,0,0" VerticalAlignment="Top" Grid.Column="1"/>
                     <Label Content="Minimim Count" HorizontalAlignment="Left" Margin="177.931,10,0,0" VerticalAlignment="Top" Grid.Column="1"/>
 
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="82.931,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="82.931,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="82.931,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="82.931,130,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="82.931,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="82.931,190,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
+                    <TextBox Name ="harnessCapacity" HorizontalAlignment="Left" Height="20" Margin="82.931,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
+                    <TextBox Name ="reflectorCapacity" HorizontalAlignment="Left" Height="20" Margin="82.931,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
+                    <TextBox Name ="housingCapacity" HorizontalAlignment="Left" Height="20" Margin="82.931,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
+                    <TextBox Name ="lensCapacity" HorizontalAlignment="Left" Height="20" Margin="82.931,130,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
+                    <TextBox Name ="bulbCapacity" HorizontalAlignment="Left" Height="20" Margin="82.931,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
+                    <TextBox Name ="bezelCapacity" HorizontalAlignment="Left" Height="20" Margin="82.931,190,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
 
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="182.931,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="182.931,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="182.931,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="182.931,130,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="182.931,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="182.931,190,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
+                    <TextBox Name ="harnessMinimum" HorizontalAlignment="Left" Height="20" Margin="182.931,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
+                    <TextBox Name ="reflectorMinimum" HorizontalAlignment="Left" Height="20" Margin="182.931,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
+                    <TextBox Name ="housingMinimum" HorizontalAlignment="Left" Height="20" Margin="182.931,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
+                    <TextBox Name ="lensMinimum" HorizontalAlignment="Left" Height="20" Margin="182.931,130,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
+                    <TextBox Name ="bulbMinimum" HorizontalAlignment="Left" Height="20" Margin="182.931,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
+                    <TextBox Name ="bezelMinimum" HorizontalAlignment="Left" Height="20" Margin="182.931,190,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" Grid.Column="1"/>
 
                 </Grid>
             </TabItem>
@@ -74,15 +74,15 @@
                     <Label Content="Number of Stations" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
                     <Label Content="Test Tray Capacity" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
 
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="150,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" />
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="150,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" />
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="150,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95"/>
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="150,104,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95"/>
-                    <TextBox HorizontalAlignment="Left" Height="20" Margin="150,134,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95"/>
+                    <TextBox Name ="tickTimeBox" HorizontalAlignment="Left" Height="20" Margin="150,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" />
+                    <TextBox Name ="runnerFrequency" HorizontalAlignment="Left" Height="20" Margin="150,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" />
+                    <TextBox Name ="assemblyTime" HorizontalAlignment="Left" Height="20" Margin="150,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95"/>
+                    <TextBox Name ="numberOfStations" HorizontalAlignment="Left" Height="20" Margin="150,104,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95"/>
+                    <TextBox Name ="testTrayCapacity" HorizontalAlignment="Left" Height="20" Margin="150,134,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95"/>
 
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="455,289,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Update Settings" HorizontalAlignment="Left" Margin="430,289,0,0" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Window>
