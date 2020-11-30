@@ -90,10 +90,8 @@ namespace ConfigTool
         {
             SqlServerDal dal = new SqlServerDal(dbName);
 
+
             ConfigModel config = new ConfigModel();
-
-
-            //fill the config model with parameters
 
             try
             {
