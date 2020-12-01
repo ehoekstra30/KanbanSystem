@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigTool", "ConfigTool\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkstationSimulator", "WorkstationSimulator\WorkstationSimulator.csproj", "{93FA9B05-F996-40C1-B1F6-159B8482E693}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanCore", "KanbanCore\KanbanCore.csproj", "{74AF840E-6704-40A8-9983-6E3A2BB3ED48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{93FA9B05-F996-40C1-B1F6-159B8482E693}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93FA9B05-F996-40C1-B1F6-159B8482E693}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93FA9B05-F996-40C1-B1F6-159B8482E693}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74AF840E-6704-40A8-9983-6E3A2BB3ED48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74AF840E-6704-40A8-9983-6E3A2BB3ED48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74AF840E-6704-40A8-9983-6E3A2BB3ED48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74AF840E-6704-40A8-9983-6E3A2BB3ED48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

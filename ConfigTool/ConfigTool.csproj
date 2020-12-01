@@ -103,5 +103,11 @@
   <ItemGroup>
     <Content Include="sql\kanbandb_configtable_setup.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KanbanCore\KanbanCore.csproj">
+      <Project>{74af840e-6704-40a8-9983-6e3a2bb3ed48}</Project>
+      <Name>KanbanCore</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
