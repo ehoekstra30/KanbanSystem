@@ -57,7 +57,12 @@ namespace WorkstationSimulator
 
         private void setupWorkstation()
         {
-
+            this.harnessBin = 10;
+            this.reflectorBin = 20;
+            this.housingBin = 10;
+            this.lensBin = 30;
+            this.bulbBin = 10;
+            this.bezelBin = 40;
         }
 
 
