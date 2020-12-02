@@ -24,7 +24,8 @@ namespace WorkstationSimulator
         private void Form1_Load(object sender, EventArgs e)
         {
             this.kdb = new KanbanDbModel(); // provides modelled connection to db defined in App.config
-            
+
+            // TODO: We gotta ask for the worker's experience level here, before starting....
         }
     }
 }
