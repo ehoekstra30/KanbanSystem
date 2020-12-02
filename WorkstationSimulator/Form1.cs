@@ -58,6 +58,8 @@ namespace WorkstationSimulator
                 exp = ExperienceLevel_t.Senior;
             }
             worker = new Worker(this.kdb, exp, 100);
+            
+            RunSim();
         }
 
 

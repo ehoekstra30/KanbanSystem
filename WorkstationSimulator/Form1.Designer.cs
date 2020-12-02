@@ -35,6 +35,7 @@
             this.startBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.stopBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,16 +89,27 @@
             this.chart.TabIndex = 3;
             this.chart.Text = "chart1";
             // 
+            // stopBtn
+            // 
+            this.stopBtn.Enabled = false;
+            this.stopBtn.Location = new System.Drawing.Point(278, 29);
+            this.stopBtn.Name = "stopBtn";
+            this.stopBtn.Size = new System.Drawing.Size(127, 23);
+            this.stopBtn.TabIndex = 4;
+            this.stopBtn.Text = "Stop";
+            this.stopBtn.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 366);
+            this.Controls.Add(this.stopBtn);
             this.Controls.Add(this.chart);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.startBtn);
             this.Controls.Add(this.workerExperienceBox);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -114,6 +126,7 @@
         private System.Windows.Forms.Button startBtn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart;
+        private System.Windows.Forms.Button stopBtn;
     }
 }
 
