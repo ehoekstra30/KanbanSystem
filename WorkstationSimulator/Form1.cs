@@ -56,6 +56,15 @@ namespace WorkstationSimulator
         }
 
 
+        //Run on a separate thread in order to simulate time passing
+        public void RunSim() { 
+            
+        }
+
+        //updates the chart with new bin values
+        public void UpdateChart() { 
+        
+        }
 
         private void workerExperienceBox_SelectedIndexChanged(object sender, EventArgs e)
         {
