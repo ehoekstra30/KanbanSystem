@@ -63,6 +63,7 @@ namespace WorkstationSimulator
             this.lensBin = 30;
             this.bulbBin = 10;
             this.bezelBin = 40;
+            this.assemblyTimeVariance = 0.1;
         }
 
 
