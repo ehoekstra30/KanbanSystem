@@ -12,20 +12,54 @@ using KanbanCore;
 
 namespace WorkstationSimulator
 {
+
     public partial class Form1 : Form
     {
+        private Worker worker;
         private KanbanDbModel kdb;
 
+        //Simple contructor to handle for setup
         public Form1()
         {
+            //BASIC FORM SETUP
             InitializeComponent();
+            this.Text = "Kanban Worker Simulator";
+            chart.Series.Clear();
+            worker = null;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             this.kdb = new KanbanDbModel(); // provides modelled connection to db defined in App.config
+        }
 
-            // TODO: We gotta ask for the worker's experience level here, before starting....
+
+        //Creates a worker object and assigns appropriate values to begin the simulation
+        private void startBtn_Click(object sender, EventArgs e)
+        {
+
+            ExperienceLevel_t exp = ExperienceLevel_t.Experienced;
+
+            if (workerExperienceBox.SelectedIndex == 0)
+            {
+                exp = ExperienceLevel_t.Rookie;
+            }
+            else if (workerExperienceBox.SelectedIndex == 1)
+            {
+                exp = ExperienceLevel_t.Experienced;
+            }
+            else
+            {
+                exp = ExperienceLevel_t.Senior;
+            }
+            worker = new Worker(exp, 100);
+        }
+
+
+
+        private void workerExperienceBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            startBtn.Enabled = true;
         }
     }
 }
