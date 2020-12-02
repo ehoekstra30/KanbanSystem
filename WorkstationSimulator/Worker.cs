@@ -24,10 +24,12 @@ namespace WorkstationSimulator
     public class Worker
     {
         private ExperienceLevel_t experienceLevel;
+        private int minutesPerSecond;
 
-        public Worker(ExperienceLevel_t experienceLevel)
+        public Worker(ExperienceLevel_t experienceLevel, int minutesPerSecond)
         {
             this.experienceLevel = experienceLevel;
+            this.minutesPerSecond = minutesPerSecond;
         }
     }
 }
