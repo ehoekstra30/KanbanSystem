@@ -77,12 +77,12 @@ namespace WorkstationSimulator
 
             chart.Series[seriesName].Points.Clear();
 
-            chart.Series[seriesName].Points.AddXY(worker.HarnessBin, 5);
-            chart.Series[seriesName].Points.AddXY(worker.ReflectorBin, 5);
-            chart.Series[seriesName].Points.AddXY(worker.HousingBin, 5);
-            chart.Series[seriesName].Points.AddXY(worker.LensBin, 5);
-            chart.Series[seriesName].Points.AddXY(worker.BulbBin, 5);
-            chart.Series[seriesName].Points.AddXY(worker.BezelBin, 5);
+            chart.Series[seriesName].Points.AddXY("Harnesses",worker.HarnessBin);
+            chart.Series[seriesName].Points.AddXY("Reflectors",worker.ReflectorBin);
+            chart.Series[seriesName].Points.AddXY("Housings",worker.HousingBin);
+            chart.Series[seriesName].Points.AddXY("Lenses",worker.LensBin);
+            chart.Series[seriesName].Points.AddXY("Bulbs",worker.BulbBin);
+            chart.Series[seriesName].Points.AddXY("Bezels", worker.BezelBin);
 
             chart.Show();
             chart.ResetAutoValues();
