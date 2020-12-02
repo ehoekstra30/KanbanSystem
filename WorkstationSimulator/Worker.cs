@@ -50,6 +50,7 @@ namespace WorkstationSimulator
             this.fogLampsToMake = 0;
             this.fogLampsMade = 0;
             this.kdb = kdb;
+            this.rand = new Random();
 
             this.setupWorkstation();
         }
