@@ -15,16 +15,21 @@ namespace WorkstationSimulator
 
     public partial class Form1 : Form
     {
+        private static string seriesName = "Bin Contents";
+
         private Worker worker;
         private KanbanDbModel kdb;
 
         //Simple contructor to handle for setup
         public Form1()
         {
-            //BASIC FORM SETUP
+            //BASIC FORM AND CHART SETUP
             InitializeComponent();
             this.Text = "Kanban Worker Simulator";
             chart.Series.Clear();
+            chart.Series.Add(seriesName);
+            chart.Series[seriesName].SetDefault(true);
+            chart.Series[seriesName].Enabled = true;
             worker = null;
         }
 
@@ -57,13 +62,28 @@ namespace WorkstationSimulator
 
 
         //Run on a separate thread in order to simulate time passing
-        public void RunSim() { 
-            
+        public void RunSim() {
+
+            worker.SimulateWork();
+
+            UpdateChart();
+
         }
 
         //updates the chart with new bin values
-        public void UpdateChart() { 
-        
+        public void UpdateChart() {
+
+            chart.Series[seriesName].Points.Clear();
+
+            chart.Series[seriesName].Points.AddXY(worker.HarnessBin, 5);
+            chart.Series[seriesName].Points.AddXY(worker.ReflectorBin, 5);
+            chart.Series[seriesName].Points.AddXY(worker.HousingBin, 5);
+            chart.Series[seriesName].Points.AddXY(worker.LensBin, 5);
+            chart.Series[seriesName].Points.AddXY(worker.BulbBin, 5);
+            chart.Series[seriesName].Points.AddXY(worker.BezelBin, 5);
+
+            chart.Show();
+            chart.ResetAutoValues();
         }
 
         private void workerExperienceBox_SelectedIndexChanged(object sender, EventArgs e)
