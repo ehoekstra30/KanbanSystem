@@ -31,9 +31,17 @@ namespace WorkstationSimulator
         private int fogLampsMade;
         private int fogLampsOnTestTray;
         private int currentTestTrayId;
+        private KanbanDbModel kdb;
 
         private Random rand;
         private double assemblyTimeVariance;
+
+        private static int harnessBinMax;
+        private static int reflectorBinMax;
+        private static int housingBinMax;
+        private static int lensBinMax;
+        private static int bulbBinMax;
+        private static int bezelBinMax;
 
         public Worker(KanbanDbModel kdb, ExperienceLevel_t experienceLevel, int minutesPerSecond)
         {
@@ -41,6 +49,15 @@ namespace WorkstationSimulator
             this.minutesPerSecond = minutesPerSecond;
             this.fogLampsToMake = 0;
             this.fogLampsMade = 0;
+            this.kdb = kdb;
+
+            this.setupWorkstation();
+        }
+
+
+        private void setupWorkstation()
+        {
+
         }
 
 
@@ -93,8 +110,15 @@ namespace WorkstationSimulator
             }
 
             // Update these newly made fog lamps to Db Model
-
+            this.simulateWorkOnDb();
         }
+
+
+        /*
+        public void SendRunner()
+        {
+
+        } */
 
 
         private double getAssemblyTimeVarianceForThisRound()
@@ -137,11 +161,8 @@ namespace WorkstationSimulator
             }
         }
 
-        private bool simulateWorkOnDb(KanbanDbModel kdb)
+        private bool simulateWorkOnDb()
         {
-            // For each fogLampMade...
-            // ...
-
             // Get a hold of the current test tray we are working on
             TestTray tt = kdb.TestTrays.Find(this.currentTestTrayId);
             
@@ -151,6 +172,8 @@ namespace WorkstationSimulator
                 // Tray is complete and we are still waiting on runner; return
                 return true;
             }
+
+
 
             int nextFogLampId = tt.FogLamps.Count + 1;
             FogLamp fl = new FogLamp();
