@@ -17,6 +17,8 @@ namespace WorkstationSimulator
     {
         private static string seriesName = "Bin Contents";
 
+        private Boolean run;
+
         private Worker worker;
         private KanbanDbModel kdb;
 
@@ -31,6 +33,7 @@ namespace WorkstationSimulator
             chart.Series[seriesName].SetDefault(true);
             chart.Series[seriesName].Enabled = true;
             worker = null;
+            run = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -90,6 +93,12 @@ namespace WorkstationSimulator
 
         private void workerExperienceBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            startBtn.Enabled = true;
+        }
+
+        private void stopBtn_Click(object sender, EventArgs e)
+        {
+            stopBtn.Enabled = false;
             startBtn.Enabled = true;
         }
     }
