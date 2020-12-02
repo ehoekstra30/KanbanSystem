@@ -25,7 +25,8 @@ namespace WorkstationSimulator
     {
         private ExperienceLevel_t experienceLevel;
         private int minutesPerSecond;
-        private float fogLampsToMake;
+        private double fogLampsToMake;
+        private int fogLampsMade;
 
         private Random rand;
         private double assemblyTimeVariance;
@@ -35,13 +36,39 @@ namespace WorkstationSimulator
             this.experienceLevel = experienceLevel;
             this.minutesPerSecond = minutesPerSecond;
             this.fogLampsToMake = 0;
+            this.fogLampsMade = 0;
         }
+
+
+        public int HarnessBin { get; }
+        private int harnessBin;
+
+        public int ReflectorBin { get; }
+        private int reflectorBin;
+
+        public int HousingBin { get; }
+        private int housingBin;
+
+        public int LensBin { get; }
+        private int lensBin;
+
+        public int BulbBin { get; }
+        private int bulbBin;
+
+        public int BezelBin { get; }
+        private int bezelBin;
 
 
         public void SimulateWork()
         {
-            this.getAssemblyTimeVarianceForThisRound();
-            this.fogLampsToMake += this.minutesPerSecond * this.
+            double variance = this.getAssemblyTimeVarianceForThisRound();
+            this.fogLampsToMake += this.minutesPerSecond * variance;
+
+            while (this.fogLampsToMake >= 1)
+            {
+                // if there are parts available, make a foglamp
+
+            }
         }
 
 
@@ -64,7 +91,25 @@ namespace WorkstationSimulator
                     break;
             }
 
-            return variance;
+            return variance+1;
+        }
+
+
+        private bool arePartsAvailable()
+        {
+            if (() &&
+                () &&
+                () &&
+                () &&
+                () &&
+                ())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
