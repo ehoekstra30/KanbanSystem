@@ -91,7 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KanbanDal\KanbanDal.csproj">
-      <Project>{50a6c3b9-25b2-4804-a3a6-356abe0e5663}</Project>
+      <Project>{2d4491f7-407b-4612-a5c3-8bae222d0a0e}</Project>
       <Name>KanbanDal</Name>
     </ProjectReference>
   </ItemGroup>

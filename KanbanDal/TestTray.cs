@@ -20,6 +20,8 @@ namespace KanbanDal
 
         public bool IsCompleted { get; set; }
 
+        public bool IsCurrentlyInUse { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FogLamp> FogLamps { get; set; }
 

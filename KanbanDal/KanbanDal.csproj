@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{50A6C3B9-25B2-4804-A3A6-356ABE0E5663}</ProjectGuid>
+    <ProjectGuid>{2D4491F7-407B-4612-A5C3-8BAE222D0A0E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KanbanDal</RootNamespace>
