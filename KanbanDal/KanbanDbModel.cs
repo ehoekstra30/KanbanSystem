@@ -29,11 +29,6 @@ namespace KanbanDal
                 .Property(e => e.SystemValue)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<FogLamp>()
-                .HasMany(e => e.OrderLines)
-                .WithRequired(e => e.FogLamp)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<FogLampOrder>()
                 .HasMany(e => e.OrderLines)
                 .WithRequired(e => e.FogLampOrder)

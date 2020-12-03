@@ -24,8 +24,6 @@ namespace KanbanDal
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int OrderId { get; set; }
 
-        public virtual FogLamp FogLamp { get; set; }
-
         public virtual FogLampOrder FogLampOrder { get; set; }
 
         public virtual TestTray TestTray { get; set; }

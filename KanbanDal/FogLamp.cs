@@ -9,14 +9,13 @@ namespace KanbanDal
     [Table("FogLamp")]
     public partial class FogLamp
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public FogLamp()
-        {
-            OrderLines = new HashSet<OrderLine>();
-        }
-
+        [Key]
+        [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int TestTrayId { get; set; }
 
+        [Key]
+        [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int FogLampId { get; set; }
 
@@ -25,8 +24,5 @@ namespace KanbanDal
         public bool? IsEffective { get; set; }
 
         public virtual TestTray TestTray { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderLine> OrderLines { get; set; }
     }
 }
