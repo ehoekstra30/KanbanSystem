@@ -356,6 +356,7 @@ namespace WorkstationSimulator
             // Put the test tray away
             TestTray tt = this.kdb.TestTrays.Find(this.currentTestTrayId);
             tt.IsCurrentlyInUse = false;
+            kdb.SaveChanges();
         }
 
 
