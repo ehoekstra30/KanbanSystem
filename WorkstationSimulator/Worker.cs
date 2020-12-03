@@ -147,7 +147,7 @@ namespace WorkstationSimulator
 
             this.currentTestTrayId = this.kdb.TestTrays.Count();
             this.fogLampsOnTestTray = 0;
-            this.kdb.SaveChanges();
+            //this.kdb.SaveChanges();
 
         }
 
@@ -383,7 +383,7 @@ namespace WorkstationSimulator
             }
 
 
-            kdb.SaveChanges();
+            //kdb.SaveChanges();
             return true;
         }
 
