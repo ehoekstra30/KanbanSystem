@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 using KanbanCore;
 
@@ -17,6 +18,7 @@ namespace WorkstationSimulator
     {
         private static string seriesName = "Bin Contents";
 
+        private Thread thread;
         private Boolean run;
 
         private Worker worker;
@@ -63,6 +65,9 @@ namespace WorkstationSimulator
             worker = new Worker(this.kdb, exp, 100);
             
             RunSim();
+
+            stopBtn.Enabled = true;
+            startBtn.Enabled = false;
         }
 
 
@@ -99,7 +104,13 @@ namespace WorkstationSimulator
         private void stopBtn_Click(object sender, EventArgs e)
         {
             stopBtn.Enabled = false;
-            startBtn.Enabled = true;
+            resumeBtn.Enabled = true;
+        }
+
+        private void resumeBtn_Click(object sender, EventArgs e)
+        {
+            resumeBtn.Enabled = false;
+            stopBtn.Enabled = true;
         }
     }
 }
