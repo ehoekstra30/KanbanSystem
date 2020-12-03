@@ -27,7 +27,7 @@ namespace WorkstationSimulator
     }
 
 
-    public class Worker
+    public class Worker : IDisposable
     {
 
         private ExperienceLevel_t experienceLevel;
@@ -67,13 +67,13 @@ namespace WorkstationSimulator
 
 
         // !!! CONSTRUCTOR !!!
-        public Worker(KanbanDbModel kdb, ExperienceLevel_t experienceLevel, int minutesPerSecond)
+        public Worker(ExperienceLevel_t experienceLevel, int minutesPerSecond)
         {
             this.experienceLevel = experienceLevel;
             this.minutesPerSecond = minutesPerSecond;
             this.fogLampsToMake = 0;
             this.fogLampsMade = 0;
-            this.kdb = kdb;
+            this.kdb = new KanbanDbModel();
             this.rand = new Random();
 
             // Set up the workstation
@@ -236,6 +236,7 @@ namespace WorkstationSimulator
 
         public int BezelBin { get { return this.bezelBin; } }
         private int bezelBin;
+        private bool disposedValue;
 
 
 
@@ -465,6 +466,39 @@ namespace WorkstationSimulator
             return true;
         }
 
+
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects)
+                    
+                    this.kdb.Dispose();
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+                // TODO: set large fields to null
+                this.rand = null;
+                disposedValue = true;
+            }
+        }
+
+        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+        // ~Worker()
+        // {
+        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        //     Dispose(disposing: false);
+        // }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
     }
 
 }
