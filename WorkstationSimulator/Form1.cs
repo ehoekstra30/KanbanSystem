@@ -91,7 +91,9 @@ namespace WorkstationSimulator
                 UpdateChart();
 
                 runnerCounter++;
-
+                if (run == false) {
+                    break;
+                }
                 Thread.Sleep(1000);
             }
 
