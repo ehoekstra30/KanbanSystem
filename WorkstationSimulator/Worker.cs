@@ -111,6 +111,8 @@ namespace WorkstationSimulator
                 select station;
             Workstation wstation = queryWorkstations.First();
 
+            wstation.IsCurrentlyWorking = true;
+
             this.harnessBin = (int)wstation.HarnessAmount;
             this.reflectorBin = (int)wstation.ReflectorAmount;
             this.housingBin = (int)wstation.HousingAmount;
@@ -155,22 +157,22 @@ namespace WorkstationSimulator
 
 
 
-        public int HarnessBin { get; }
+        public int HarnessBin { get { return this.harnessBin; } }
         private int harnessBin;
 
-        public int ReflectorBin { get; }
+        public int ReflectorBin { get { return this.reflectorBin; } }
         private int reflectorBin;
 
-        public int HousingBin { get; }
+        public int HousingBin { get { return this.housingBin; } }
         private int housingBin;
 
-        public int LensBin { get; }
+        public int LensBin { get { return this.lensBin; } }
         private int lensBin;
 
-        public int BulbBin { get; }
+        public int BulbBin { get { return this.bulbBin; } }
         private int bulbBin;
 
-        public int BezelBin { get; }
+        public int BezelBin { get { return this.bezelBin; } }
         private int bezelBin;
 
 
