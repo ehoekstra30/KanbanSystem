@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 
-using KanbanCore;
+using KanbanDal;
 
 namespace WorkstationSimulator
 {

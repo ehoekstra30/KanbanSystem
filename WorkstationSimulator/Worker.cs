@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using KanbanCore;
+using KanbanDal;
 
 
 /*  FILE        : Worker.cs
@@ -27,7 +27,7 @@ namespace WorkstationSimulator
     }
 
 
-    public class Worker
+    public class Worker : IDisposable
     {
 
         private ExperienceLevel_t experienceLevel;
@@ -37,6 +37,7 @@ namespace WorkstationSimulator
         private int fogLampsOnTestTray;
         private int currentTestTrayId;
         private KanbanDbModel kdb;
+        private Workstation wstation;
 
         private Random rand;
         private double assemblyTimeVariance;
@@ -54,6 +55,8 @@ namespace WorkstationSimulator
         private static int lensBinMin;
         private static int bulbBinMin;
         private static int bezelBinMin;
+
+        
 
 
 
@@ -73,7 +76,17 @@ namespace WorkstationSimulator
             this.kdb = kdb;
             this.rand = new Random();
 
-            this.setupWorkstation();
+            // Set up the workstation
+            // If it cannot be setup, set our boolean to false so that external program knows
+            // that no Worker is present
+            if (this.setupWorkstation())
+            {
+                this.isAtWorkstation = true;
+            }
+            else
+            {
+                this.isAtWorkstation = false;
+            }
         }
 
 
@@ -83,7 +96,7 @@ namespace WorkstationSimulator
          *  ALTERS      :
          *  RETURNS     :
          */
-        private void setupWorkstation()
+        private bool setupWorkstation()
         {
             // Set up static maxes for each bin (retrieved from Config)
             Worker.harnessBinMax = Int32.Parse(this.kdb.ConfigTables.Find("HarnessCapacity").SystemValue);
@@ -102,52 +115,97 @@ namespace WorkstationSimulator
             Worker.bezelBinMin = Int32.Parse(this.kdb.ConfigTables.Find("BezelMinimum").SystemValue);
 
 
-            // Set each bin to whatever they were left at the workstation last time
-            // If this is the first time this workstation is being used, it will be set
-            //  to the capacities of each bin.
+            // Query to find an available workstation
             IQueryable<Workstation> queryWorkstations =
                 from station in this.kdb.Workstations
                 where station.IsCurrentlyWorking == false
                 select station;
-            Workstation wstation = queryWorkstations.First();
-
-            wstation.IsCurrentlyWorking = true;
-
-            this.harnessBin = (int)wstation.HarnessAmount;
-            this.reflectorBin = (int)wstation.ReflectorAmount;
-            this.housingBin = (int)wstation.HousingAmount;
-            this.lensBin = (int)wstation.LensAmount;
-            this.bulbBin = (int)wstation.BulbAmount;
-            this.bezelBin = (int)wstation.BezelAmount;
             
 
-            // Set assembly time variance based on experience level
-            switch (this.experienceLevel)
+            // TODO: check that queryWorkstations actually returns smthn
+            // If not, the worker cannot work!
+            if (queryWorkstations.Any())
             {
-                case ExperienceLevel_t.Rookie:
-                    this.assemblyTimeVariance = Double.Parse(
-                        this.kdb.ConfigTables.Find("RookieAssemblyTimeVariance").SystemValue);
-                    break;
-                case ExperienceLevel_t.Experienced:
-                    this.assemblyTimeVariance = Double.Parse(
-                        this.kdb.ConfigTables.Find("ExperiencedAssemblyTimeVariance").SystemValue);
-                    break;
-                case ExperienceLevel_t.Senior:
-                    this.assemblyTimeVariance = Double.Parse(
-                        this.kdb.ConfigTables.Find("SeniorAssemblyTimeVariance").SystemValue);
-                    break;
-                default:
-                    this.assemblyTimeVariance = 0.0;
-                    break;
+                this.wstation = queryWorkstations.First();
+                wstation.IsCurrentlyWorking = true;
+
+                // Set each bin to whatever they were left at the workstation last time
+                // If this is the first time this workstation is being used, it will be set
+                //  to the capacities of each bin.
+                this.harnessBin = (int)wstation.HarnessAmount;
+                this.reflectorBin = (int)wstation.ReflectorAmount;
+                this.housingBin = (int)wstation.HousingAmount;
+                this.lensBin = (int)wstation.LensAmount;
+                this.bulbBin = (int)wstation.BulbAmount;
+                this.bezelBin = (int)wstation.BezelAmount;
+
+
+                // Set assembly time variance based on experience level
+                switch (this.experienceLevel)
+                {
+                    case ExperienceLevel_t.Rookie:
+                        this.assemblyTimeVariance = Double.Parse(
+                            this.kdb.ConfigTables.Find("RookieAssemblyTimeVariance").SystemValue);
+                        break;
+                    case ExperienceLevel_t.Experienced:
+                        this.assemblyTimeVariance = Double.Parse(
+                            this.kdb.ConfigTables.Find("ExperiencedAssemblyTimeVariance").SystemValue);
+                        break;
+                    case ExperienceLevel_t.Senior:
+                        this.assemblyTimeVariance = Double.Parse(
+                            this.kdb.ConfigTables.Find("SeniorAssemblyTimeVariance").SystemValue);
+                        break;
+                    default:
+                        this.assemblyTimeVariance = 0.0;
+                        break;
+                }
+
+                // Now, grab a new test tray for this workstation
+                // TODO: Check if any incomplete test trays have been left... grab that one instead
+                IQueryable<TestTray> queryTestTrays =
+                    from testt in this.kdb.TestTrays
+                    where testt.IsCompleted == false 
+                    where testt.IsCurrentlyInUse == false
+                    select testt;
+
+                if (queryTestTrays.Any())
+                {
+                    // There is a test tray from before with some parts on it...
+                    // Let's use it! How many parts are on it tho?
+                    var query =
+                        from thingy in this.kdb.TestTrays
+                        join otherthingy in this.kdb.FogLamps on thingy equals otherthingy.TestTray
+                        select new { 
+                            testTrayId = thingy.TestTrayId, 
+                            fogLampsSoFar = thingy.FogLamps.Count };
+                    var firstAvailableTestTray = query.FirstOrDefault();
+
+                    this.currentTestTrayId = firstAvailableTestTray.testTrayId;
+                    this.fogLampsOnTestTray = firstAvailableTestTray.fogLampsSoFar;
+
+                    // Now find this particular test tray and make sure that it is in use
+                    TestTray currtt = this.kdb.TestTrays.Find(this.currentTestTrayId);
+                    currtt.IsCurrentlyInUse = true;
+                }
+                else
+                {
+                    this.kdb.TestTrays.Add(new TestTray());
+                    this.currentTestTrayId = this.kdb.TestTrays.Count() + 1;
+                    this.fogLampsOnTestTray = 0;
+                }
+
+                
+                this.kdb.SaveChanges();
+
+                return true;
             }
 
-            // Now, grab a new test tray for this workstation
-            // TODO: Check if any incomplete test trays have been left... grab that one instead
-            this.kdb.TestTrays.Add(new TestTray());
-
-            this.currentTestTrayId = this.kdb.TestTrays.Count();
-            this.fogLampsOnTestTray = 0;
-            //this.kdb.SaveChanges();
+            else
+            {
+                // all workstations are taken up...
+                // Don't let this Worker work!! Get outta here!!
+                return false;
+            }
 
         }
 
@@ -158,6 +216,8 @@ namespace WorkstationSimulator
         /* -------------------------------------------------------------------------------- */
 
 
+        public bool IsAtWorkstation { get { return this.isAtWorkstation; } }
+        private bool isAtWorkstation;
 
         public int HarnessBin { get { return this.harnessBin; } }
         private int harnessBin;
@@ -176,6 +236,7 @@ namespace WorkstationSimulator
 
         public int BezelBin { get { return this.bezelBin; } }
         private int bezelBin;
+        private bool disposedValue;
 
 
 
@@ -276,10 +337,25 @@ namespace WorkstationSimulator
             if (tt.IsCompleted)
             {
                 // Grab a new test tray
-                this.kdb.TestTrays.Add(new TestTray());
-                this.currentTestTrayId = this.kdb.TestTrays.Count();
+                TestTray newtt = new TestTray();
+                newtt.IsCompleted = false;
+                newtt.IsCurrentlyInUse = true;
+                this.kdb.TestTrays.Add(newtt);
+                
                 this.kdb.SaveChanges();
+                this.currentTestTrayId = this.kdb.TestTrays.Count();
             }
+        }
+
+
+        public void EndWork()
+        {
+            // Release the workstation in use
+            this.wstation.IsCurrentlyWorking = false;
+
+            // Put the test tray away
+            TestTray tt = this.kdb.TestTrays.Find(this.currentTestTrayId);
+            tt.IsCurrentlyInUse = false;
         }
 
 
@@ -365,13 +441,16 @@ namespace WorkstationSimulator
 
 
             int nextFogLampId = tt.FogLamps.Count + 1;
-            FogLamp fl = new FogLamp();
-            fl.ExperienceLevelOfAssembler = (int)this.experienceLevel;
-            fl.TestTrayId = this.currentTestTrayId;
+            
+            
 
             while ((nextFogLampId <= 60) && (this.fogLampsMade > 0))
             {
+                FogLamp fl = new FogLamp();
                 fl.FogLampId = nextFogLampId;
+                fl.ExperienceLevelOfAssembler = (int)this.experienceLevel;
+                fl.TestTrayId = this.currentTestTrayId;
+
                 kdb.FogLamps.Add(fl);
 
                 nextFogLampId++;
@@ -383,10 +462,41 @@ namespace WorkstationSimulator
             }
 
 
-            //kdb.SaveChanges();
+            kdb.SaveChanges();
             return true;
         }
 
+
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects)
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+                // TODO: set large fields to null
+                this.rand = null;
+                disposedValue = true;
+            }
+        }
+
+        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+        // ~Worker()
+        // {
+        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        //     Dispose(disposing: false);
+        // }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
     }
 
 }
