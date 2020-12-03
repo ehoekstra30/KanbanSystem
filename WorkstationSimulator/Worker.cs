@@ -144,9 +144,11 @@ namespace WorkstationSimulator
             // Now, grab a new test tray for this workstation
             // TODO: Check if any incomplete test trays have been left... grab that one instead
             this.kdb.TestTrays.Add(new TestTray());
+
             this.currentTestTrayId = this.kdb.TestTrays.Count();
             this.fogLampsOnTestTray = 0;
             this.kdb.SaveChanges();
+
         }
 
 
