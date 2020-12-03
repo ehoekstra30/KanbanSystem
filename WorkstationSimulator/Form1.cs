@@ -60,7 +60,7 @@ namespace WorkstationSimulator
             {
                 exp = ExperienceLevel_t.Senior;
             }
-            worker = new Worker(exp, 100);
+            worker = new Worker(this.kdb, exp, 100);
             
             RunSim();
         }

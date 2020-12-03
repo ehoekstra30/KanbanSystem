@@ -67,13 +67,13 @@ namespace WorkstationSimulator
 
 
         // !!! CONSTRUCTOR !!!
-        public Worker(ExperienceLevel_t experienceLevel, int minutesPerSecond)
+        public Worker(KanbanDbModel kdb, ExperienceLevel_t experienceLevel, int minutesPerSecond)
         {
             this.experienceLevel = experienceLevel;
             this.minutesPerSecond = minutesPerSecond;
             this.fogLampsToMake = 0;
             this.fogLampsMade = 0;
-            this.kdb = new KanbanDbModel();
+            this.kdb = kdb;
             this.rand = new Random();
 
             // Set up the workstation
@@ -475,8 +475,6 @@ namespace WorkstationSimulator
                 if (disposing)
                 {
                     // TODO: dispose managed state (managed objects)
-                    
-                    this.kdb.Dispose();
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override finalizer
