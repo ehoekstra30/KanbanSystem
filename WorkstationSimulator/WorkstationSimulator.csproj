@@ -90,9 +90,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KanbanCore\KanbanCore.csproj">
-      <Project>{74af840e-6704-40a8-9983-6e3a2bb3ed48}</Project>
-      <Name>KanbanCore</Name>
+    <ProjectReference Include="..\KanbanDal\KanbanDal.csproj">
+      <Project>{50a6c3b9-25b2-4804-a3a6-356abe0e5663}</Project>
+      <Name>KanbanDal</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
