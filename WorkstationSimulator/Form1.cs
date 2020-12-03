@@ -20,6 +20,8 @@ namespace WorkstationSimulator
 
         private Thread thread;
         private Boolean run;
+        private int runnerCounter;
+        private static int runnerWaitTime = 5;
 
         private Worker worker;
         private KanbanDbModel kdb;
@@ -34,6 +36,7 @@ namespace WorkstationSimulator
             chart.Series.Add(seriesName);
             chart.Series[seriesName].SetDefault(true);
             chart.Series[seriesName].Enabled = true;
+            runnerCounter = 0;
             worker = null;
             run = false;
         }
@@ -47,7 +50,6 @@ namespace WorkstationSimulator
         //Creates a worker object and assigns appropriate values to begin the simulation
         private void startBtn_Click(object sender, EventArgs e)
         {
-
             ExperienceLevel_t exp = ExperienceLevel_t.Experienced;
 
             if (workerExperienceBox.SelectedIndex == 0)
@@ -63,8 +65,9 @@ namespace WorkstationSimulator
                 exp = ExperienceLevel_t.Senior;
             }
             worker = new Worker(this.kdb, exp, 2);
-            
-            RunSim();
+
+            thread = new Thread(RunSim);
+            thread.Start();
 
             stopBtn.Enabled = true;
             startBtn.Enabled = false;
@@ -74,11 +77,27 @@ namespace WorkstationSimulator
         //Run on a separate thread in order to simulate time passing
         public void RunSim() {
 
-            worker.SimulateWork();
-                
-            UpdateChart();
+            run = true;
+
+            while (run == true)
+            {
+                //check if it is time for a runner to be sent
+                if (runnerCounter == 5)
+                {
+                    worker.SendRunner();
+                    runnerCounter = 0;
+                }
+                worker.SimulateWork();
+                UpdateChart();
+
+                runnerCounter++;
+
+                Thread.Sleep(1000);
+            }
 
         }
+
+
 
         //updates the chart with new bin values
         public void UpdateChart() {
@@ -104,16 +123,25 @@ namespace WorkstationSimulator
 
         private void stopBtn_Click(object sender, EventArgs e)
         {
+            run = false;
             stopBtn.Enabled = false;
             resumeBtn.Enabled = true;
         }
 
         private void resumeBtn_Click(object sender, EventArgs e)
         {
-            RunSim();
-            UpdateChart();
-            //resumeBtn.Enabled = false;
+            thread = new Thread(RunSim);
+            thread.Start();
+            resumeBtn.Enabled = false;
             stopBtn.Enabled = true;
+        }
+
+        private void Form1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (worker != null)
+            {
+                worker.EndWork();
+            }
         }
     }
 }
