@@ -75,7 +75,7 @@ namespace WorkstationSimulator
         public void RunSim() {
 
             worker.SimulateWork();
-
+                
             UpdateChart();
 
         }
@@ -109,7 +109,9 @@ namespace WorkstationSimulator
 
         private void resumeBtn_Click(object sender, EventArgs e)
         {
-            resumeBtn.Enabled = false;
+            RunSim();
+            UpdateChart();
+            //resumeBtn.Enabled = false;
             stopBtn.Enabled = true;
         }
     }

@@ -104,7 +104,6 @@
             // 
             // resumeBtn
             // 
-            this.resumeBtn.Enabled = false;
             this.resumeBtn.Location = new System.Drawing.Point(278, 29);
             this.resumeBtn.Name = "resumeBtn";
             this.resumeBtn.Size = new System.Drawing.Size(127, 23);
