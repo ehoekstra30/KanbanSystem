@@ -83,7 +83,8 @@ namespace WorkstationSimulator
         //updates the chart with new bin values
         public void UpdateChart() {
 
-            chart.Series[seriesName].Points.Clear();
+            chart.Series.Clear();
+            chart.Series.Add(seriesName);
 
             chart.Series[seriesName].Points.AddXY("Harnesses",worker.HarnessBin);
             chart.Series[seriesName].Points.AddXY("Reflectors",worker.ReflectorBin);
