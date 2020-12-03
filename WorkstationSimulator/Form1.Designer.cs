@@ -82,6 +82,7 @@
             this.chart.Legends.Add(legend1);
             this.chart.Location = new System.Drawing.Point(12, 57);
             this.chart.Name = "chart";
+            this.chart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
