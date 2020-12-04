@@ -8,12 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
-
 using KanbanDal;
+using System.Reflection;
+
+/*  FILE        : Form1.cs
+ *  PROJECT     : AdvSql Project
+ *  DEVELOPERS  : Ethan Hoekstra & Mohamed Benzreba
+ *  PURPOSE     : Runs the UI logic relating to button presses, worker manipulation, and more.
+ */
+
 
 namespace WorkstationSimulator
 {
-
     public partial class Form1 : Form
     {
         private static string seriesName = "Bin Contents";
@@ -45,6 +51,7 @@ namespace WorkstationSimulator
         {
             this.kdb = new KanbanDbModel(); // provides modelled connection to db defined in App.config
         }
+
 
 
         //Creates a worker object and assigns appropriate values to begin the simulation
@@ -98,6 +105,8 @@ namespace WorkstationSimulator
             }
 
         }
+
+
 
 
 
