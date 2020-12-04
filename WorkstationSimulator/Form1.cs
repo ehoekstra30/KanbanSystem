@@ -95,7 +95,7 @@ namespace WorkstationSimulator
                     runnerCounter = 0;
                 }
                 worker.SimulateWork();
-                UpdateChart();
+                //UpdateChart();
 
                 runnerCounter++;
                 if (run == false) { 
