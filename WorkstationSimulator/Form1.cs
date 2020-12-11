@@ -81,6 +81,10 @@ namespace WorkstationSimulator
         }
 
 
+        public delegate void UpdateChartDelegate();
+
+
+
         //Run on a separate thread in order to simulate time passing
         public void RunSim() {
 
@@ -95,7 +99,8 @@ namespace WorkstationSimulator
                     runnerCounter = 0;
                 }
                 worker.SimulateWork();
-                //UpdateChart();
+
+                chart.BeginInvoke(new UpdateChartDelegate(UpdateChart));
 
                 runnerCounter++;
                 if (run == false) { 
