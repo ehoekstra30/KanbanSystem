@@ -67,11 +67,19 @@ namespace KanbanAndon
         public void RunSim() {
 
             run = true;
+            int runner = 0;
+            progressBar1.Minimum = 0;
+            progressBar1.Maximum = 5;
 
             while (run == true)
             {
                 dataGridView1.BeginInvoke(new UpdateGridDelegate(UpdateGrid));
                 Thread.Sleep(1000);
+                progressBar1.Value = runner;
+                runner++;
+                if (runner > 5) {
+                    runner = 0;                
+                }
             }
 
         }
