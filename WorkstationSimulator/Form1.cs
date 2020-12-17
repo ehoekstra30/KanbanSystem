@@ -18,7 +18,7 @@ using System.Reflection;
  */
 
 
-namespace WorkstationSimulator
+namespace KanbanAndon
 {
     public partial class Form1 : Form
     {
