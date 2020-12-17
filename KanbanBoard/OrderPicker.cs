@@ -87,7 +87,6 @@ namespace KanbanBoard
 
             order.AmountOrdered = orderAmount;
             order.IsFulfilled = false;
-
             this.isOrderFinished = false;
 
             
@@ -97,6 +96,10 @@ namespace KanbanBoard
             this.kdb.SaveChanges();
 
             this.currOrder = order;
+
+            // Clear these lists so that we can start fresh
+            this.failedTesting.Clear();
+            this.passedTesting.Clear();
 
             return this.currOrder;
         }
