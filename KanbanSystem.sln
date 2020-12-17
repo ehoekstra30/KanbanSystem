@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanDal", "KanbanDal\Kanb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanBoard", "KanbanBoard\KanbanBoard.csproj", "{A309D667-C01E-46E5-9EFF-B09ACBEACBE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndonDisplay", "WorkstationSimulator - Copy\AndonDisplay.csproj", "{2DA01B15-06E4-44E6-B726-92DF869C3F5E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndonDisplay", "KanbanAndon\AndonDisplay.csproj", "{2DA01B15-06E4-44E6-B726-92DF869C3F5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

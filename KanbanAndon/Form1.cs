@@ -72,7 +72,6 @@ namespace KanbanAndon
             List<Workstation> l = workstationReader.GetWorkstations();
             foreach (Workstation workstation in l)
             {
-                dataGridView1.Rows.Clear();
                 dataGridView1.Rows.Add("1", "2", "2");
             }
         }

@@ -42,7 +42,7 @@ values
 	
 	('TestTrayCapacity', '60');
 
-
+	go
 
 create procedure sp_UpdateConfigTable 
 	@HarnessCap as varchar(24), @ReflectorCap as varchar(24), @HousingCap as varchar(24),
