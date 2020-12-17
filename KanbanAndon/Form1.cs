@@ -46,9 +46,19 @@ namespace KanbanAndon
         {
             this.kdb = new KanbanDbModel(); // provides modelled connection to db defined in App.config
             workstationReader = new WorkstationReader(kdb);
+
+            //DEFINE GRID
+            dataGridView1.ColumnCount = 7;
+            dataGridView1.Columns[0].Name = "Bin Number";
+            dataGridView1.Columns[1].Name = "Harness";
+            dataGridView1.Columns[2].Name = "Reflector";
+            dataGridView1.Columns[3].Name = "Housing";
+            dataGridView1.Columns[4].Name = "Lens";
+            dataGridView1.Columns[5].Name = "Bulb";
+            dataGridView1.Columns[6].Name = "Bezel";
+
             thread = new Thread(RunSim);
             thread.Start();
-
         }
 
 
@@ -69,11 +79,16 @@ namespace KanbanAndon
         //updates the chart with new bin values
         public void UpdateGrid() {
 
+            dataGridView1.Rows.Clear();
+
+            int i = 0;
             List<Workstation> l = workstationReader.GetWorkstations();
             foreach (Workstation workstation in l)
             {
-                dataGridView1.Rows.Add("1", "2", "2");
+                dataGridView1.Rows.Add((i + 1).ToString(), workstation.HarnessAmount, workstation.ReflectorAmount, 
+                    workstation.HousingAmount, workstation.LensAmount, workstation.BulbAmount, workstation.BezelAmount) ;
             }
+            dataGridView1.Show();
         }
 
         private void Form1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
