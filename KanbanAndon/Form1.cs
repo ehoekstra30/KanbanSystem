@@ -39,6 +39,7 @@ namespace KanbanAndon
             //BASIC FORM AND CHART SETUP
             InitializeComponent();
             this.Text = "Kanban Andon Display";
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             run = false;
         }
 
