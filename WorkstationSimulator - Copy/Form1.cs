@@ -18,12 +18,13 @@ using System.Reflection;
  */
 
 
-namespace WorkstationSimulator
+namespace KanbanAndon
 {
     public partial class Form1 : Form
     {
         private static string seriesName = "Bin Contents";
 
+        private WorkstationReader workstationReader;
         private Thread thread;
         private Boolean run;
 
@@ -44,17 +45,12 @@ namespace WorkstationSimulator
         private void Form1_Load(object sender, EventArgs e)
         {
             this.kdb = new KanbanDbModel(); // provides modelled connection to db defined in App.config
-        }
-
-
-
-        //Creates a worker object and assigns appropriate values to begin the simulation
-        private void startBtn_Click(object sender, EventArgs e)
-        {
-
+            workstationReader = new WorkstationReader(kdb);
             thread = new Thread(RunSim);
             thread.Start();
+
         }
+
 
         //Run on a separate thread in order to simulate time passing
         public void RunSim() {
@@ -63,22 +59,27 @@ namespace WorkstationSimulator
 
             while (run == true)
             {
-
-                //chart.BeginInvoke(new UpdateChartDelegate(UpdateChart));
-
+                dataGridView1.BeginInvoke(new UpdateGridDelegate(UpdateGrid));
                 Thread.Sleep(1000);
             }
 
         }
 
 
-
-
-
         //updates the chart with new bin values
         public void UpdateGrid() {
 
-            
+            List<Workstation> l = workstationReader.GetWorkstations();
+            foreach (Workstation workstation in l)
+            {
+                dataGridView1.Rows.Clear();
+                dataGridView1.Rows.Add("1", "2", "2");
+            }
+        }
+
+        private void Form1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            thread.Abort();
         }
     }
 }

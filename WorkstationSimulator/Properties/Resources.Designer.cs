@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WorkstationSimulator.Properties
+namespace KanbanAndon.Properties
 {
 
 

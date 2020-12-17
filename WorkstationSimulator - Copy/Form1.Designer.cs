@@ -1,4 +1,4 @@
-﻿namespace WorkstationSimulator
+﻿namespace KanbanAndon
 {
     partial class Form1
     {

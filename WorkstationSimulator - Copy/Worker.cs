@@ -16,7 +16,7 @@ using KanbanDal;
  */
 
 
-namespace WorkstationSimulator
+namespace KanbanAndon
 {
     // For tracking experience level of Worker
     public enum ExperienceLevel_t
