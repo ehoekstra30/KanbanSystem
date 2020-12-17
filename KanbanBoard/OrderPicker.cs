@@ -23,6 +23,11 @@ namespace KanbanBoard
 
 
 
+        /*  DESCRIPTION :
+         *  PARAMETERS  :
+         *  ALTERS      :
+         *  RETURNS     :
+         */
         public OrderPicker(KanbanDbModel kdb)
         {
             this.kdb = kdb;
@@ -38,6 +43,11 @@ namespace KanbanBoard
         }
 
 
+
+        /*  !!! PROPERTY !!!
+         *  DESCRIPTION : Returns a list of all created, yet untested, foglamps residing
+         *      in the database.
+         */
         public List<FogLamp> Assembled
         {
             get
@@ -54,6 +64,11 @@ namespace KanbanBoard
             }
         }
 
+
+
+        /*  !!! PROPERTY !!!
+         *  DESCRIPTION : Returns list of fog lamps that have failed testing.
+         */
         public List<FogLamp> FailedTesting
         {
             get
@@ -63,6 +78,10 @@ namespace KanbanBoard
         }
 
 
+
+        /*  !!! PROPERTY !!!
+         *  DESCRIPTION : Returns list of fog lamps that have passed testing.
+         */
         public List<FogLamp> PassedTesting
         {
             get
@@ -72,6 +91,10 @@ namespace KanbanBoard
         }
 
 
+
+        /*  !!! PROPERTY !!!
+         *  DESCRIPTION : Returns internal tracker on if order is finished or not.
+         */
         public bool IsOrderFinished
         {
             get
@@ -81,20 +104,32 @@ namespace KanbanBoard
         }
 
 
+
+        /*  DESCRIPTION : Start a new order to test foglamps for.
+         *  PARAMETERS  :
+         *      int orderAmount : number of foglamps to create for this order.
+         *  ALTERS      :
+         *      Adds an order to the db.
+         *      Clears passedTesting & failedTesting.
+         *  RETURNS     :
+         *      FogLampOrder    : the order newly started.
+         */
         public FogLampOrder StartNewOrder(int orderAmount)
         {
+            // Create the nex order
             FogLampOrder order = new FogLampOrder();
-
             order.AmountOrdered = orderAmount;
             order.IsFulfilled = false;
+
+            // Set internal tracker on if order is finished
             this.isOrderFinished = false;
 
             
-
+            // Add the order to database
             this.kdb.FogLampOrders.Add(order);
-
             this.kdb.SaveChanges();
 
+            // Set the internal tracker to the order we just created
             this.currOrder = order;
 
             // Clear these lists so that we can start fresh
@@ -105,6 +140,12 @@ namespace KanbanBoard
         }
 
 
+
+        /*  DESCRIPTION :
+         *  PARAMETERS  :
+         *  ALTERS      :
+         *  RETURNS     :
+         */
         public List<FogLamp> CheckForAssembled()
         {
             // Query foglamps that are...
@@ -122,6 +163,19 @@ namespace KanbanBoard
         }
 
 
+
+        /*  DESCRIPTION : Tests numToTest number of fog lamps. If they are effective,
+         *      add foglamp to the order (through a connecting OrderLine) and to the
+         *      internal passedTesting list. If defective, simply add to failedTesting
+         *      list.
+         *  PARAMETERS  :
+         *      int numToTest   : number of foglamps to test.
+         *  ALTERS      :
+         *      Adds OrderLine to db for every effective foglamp.
+         *      Changes FogLamp's IsEffective field.
+         *      Adds to either passedTesting or failedTesting.
+         *  RETURNS     : void
+         */
         public void Test(int numToTest)
         {
             IQueryable<FogLamp> queryAssembled =
@@ -210,6 +264,15 @@ namespace KanbanBoard
             
         }
 
+
+
+        /*  DESCRIPTION : Checks if the order is completed, based on how many OrderLines
+         *      are connected to this order we're working on right now.
+         *  PARAMETERS  : void
+         *  ALTERS      :
+         *      If OrderAmount achieved, sets IsFulfilled field to true.
+         *  RETURNS     : void
+         */
         private void checkOrderStatus()
         {
             // Query order lines
