@@ -16,6 +16,7 @@ namespace KanbanBoard
         private Random random;
 
         private bool isOrderFinished;
+        private FogLampOrder currOrder;
 
         private List<FogLamp> failedTesting;
         private List<FogLamp> passedTesting;
@@ -71,13 +72,33 @@ namespace KanbanBoard
         }
 
 
+        public bool IsOrderFinished
+        {
+            get
+            {
+                return this.isOrderFinished;
+            }
+        }
+
+
         public FogLampOrder StartNewOrder(int orderAmount)
         {
             FogLampOrder order = new FogLampOrder();
 
             order.AmountOrdered = orderAmount;
+            order.IsFulfilled = false;
 
-            return order;
+            this.isOrderFinished = false;
+
+            
+
+            this.kdb.FogLampOrders.Add(order);
+
+            this.kdb.SaveChanges();
+
+            this.currOrder = order;
+
+            return this.currOrder;
         }
 
 
@@ -124,6 +145,12 @@ namespace KanbanBoard
                         {
                             fl.IsEffective = true;
                             this.passedTesting.Add(fl);
+
+                            OrderLine ol = new OrderLine();
+                            ol.OrderId = this.currOrder.OrderId;
+                            ol.TestTrayId = fl.TestTrayId;
+                            ol.FogLampId = fl.FogLampId;
+                            this.kdb.OrderLines.Add(ol);
                         }
                         else
                         {
@@ -136,6 +163,12 @@ namespace KanbanBoard
                         {
                             fl.IsEffective = true;
                             this.passedTesting.Add(fl);
+
+                            OrderLine ol = new OrderLine();
+                            ol.OrderId = this.currOrder.OrderId;
+                            ol.TestTrayId = fl.TestTrayId;
+                            ol.FogLampId = fl.FogLampId;
+                            this.kdb.OrderLines.Add(ol);
                         }
                         else
                         {
@@ -148,6 +181,12 @@ namespace KanbanBoard
                         {
                             fl.IsEffective = true;
                             this.passedTesting.Add(fl);
+
+                            OrderLine ol = new OrderLine();
+                            ol.OrderId = this.currOrder.OrderId;
+                            ol.TestTrayId = fl.TestTrayId;
+                            ol.FogLampId = fl.FogLampId;
+                            this.kdb.OrderLines.Add(ol);
                         }
                         else
                         {
@@ -162,16 +201,18 @@ namespace KanbanBoard
                 this.kdb.SaveChanges();
 
                 // TODO: Check if order has been fulfilled
-
+                this.checkOrderStatus();
             }
 
             
         }
 
-        private bool checkOrderStatus()
+        private void checkOrderStatus()
         {
             // Query order lines
             //  i.e. count of foglamps in the entire order
+
+            /*
             IQueryable<OrderLine> queryOrderLines =
                 from ol in this.kdb.OrderLines
                 join lamp in this.kdb.FogLamps on ol.FogLampId equals lamp.FogLampId
@@ -180,9 +221,15 @@ namespace KanbanBoard
                 where lamp.IsEffective == true
                 where tray.IsCompleted == true
                 where tray.IsCurrentlyInUse == false
-                select ol;
+                select ol; */
 
-            return true;
+            if (this.currOrder.OrderLines.Count() == this.currOrder.AmountOrdered)
+            {
+                this.currOrder.IsFulfilled = true;
+                this.kdb.SaveChanges();
+                this.isOrderFinished = true;
+            }
+
         }
 
 
