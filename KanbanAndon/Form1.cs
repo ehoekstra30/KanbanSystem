@@ -80,15 +80,6 @@ namespace KanbanAndon
             {
                 dataGridView1.BeginInvoke(new UpdateGridDelegate(UpdateGrid));
                 Thread.Sleep(1000);
-                if (comboBox1.SelectedIndex != -1)
-                {
-                    progressBar1.Value = runner;
-                    runner++;
-                    if (runner > 5)
-                    {
-                        runner = 0;
-                    }
-                }
             }
 
         }
@@ -97,6 +88,7 @@ namespace KanbanAndon
         //updates the chart with new bin values
         public void UpdateGrid() {
 
+            int runner = 0;
             if (comboBox1.SelectedIndex != -1)
             {
                 dataGridView1.Rows.Clear();
@@ -114,6 +106,13 @@ namespace KanbanAndon
                     i++;
                 }
                 dataGridView1.Show();
+                progressBar1.Value = runner;
+                runner++;
+                progressBar1.Show();
+                if (runner > 5)
+                {
+                    runner = 0;
+                }
             }
         }
 
