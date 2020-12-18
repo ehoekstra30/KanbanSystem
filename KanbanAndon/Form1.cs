@@ -108,6 +108,7 @@ namespace KanbanAndon
                 {
                     if (comboBox1.SelectedIndex == (i))
                     {
+
                         dataGridView1.Rows.Add((i + 1).ToString(), workstation.HarnessAmount, workstation.ReflectorAmount,
                             workstation.HousingAmount, workstation.LensAmount, workstation.BulbAmount, workstation.BezelAmount);
                     }
