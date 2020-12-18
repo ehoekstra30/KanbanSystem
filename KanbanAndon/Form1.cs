@@ -30,8 +30,8 @@ namespace KanbanAndon
         private static int maxWorkStations = 3;
         private KanbanDbModel kdb;
 
-            //delegate for updating the datagrid
-            public delegate void UpdateGridDelegate();
+        //delegate for updating the datagrid
+        public delegate void UpdateGridDelegate();
 
         //Simple contructor to handle for setup
         public Form1()
