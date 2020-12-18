@@ -27,8 +27,10 @@ namespace KanbanAndon
         }
 
         public List<Workstation> GetWorkstations() {
-            this.kdb.SaveChanges();
-            return queryWorkstations.ToList();
+            
+            return (from station in this.kdb.Workstations
+                   where station.IsCurrentlyWorking == true
+                   select station).ToList();
         }
 
     }

@@ -463,6 +463,14 @@ namespace KanbanAndon
             }
 
 
+            this.kdb.Workstations.Find(this.wstation.WorkstationId).BezelAmount = this.bezelBin;
+            this.kdb.Workstations.Find(this.wstation.WorkstationId).BulbAmount = this.bulbBin;
+            this.kdb.Workstations.Find(this.wstation.WorkstationId).HarnessAmount = this.harnessBin;
+            this.kdb.Workstations.Find(this.wstation.WorkstationId).HousingAmount = this.housingBin;
+            this.kdb.Workstations.Find(this.wstation.WorkstationId).LensAmount = this.lensBin;
+            this.kdb.Workstations.Find(this.wstation.WorkstationId).ReflectorAmount = this.reflectorBin;
+
+
             kdb.SaveChanges();
             return true;
         }

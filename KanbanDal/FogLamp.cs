@@ -24,5 +24,12 @@ namespace KanbanDal
         public bool? IsEffective { get; set; }
 
         public virtual TestTray TestTray { get; set; }
+
+        public override string ToString()
+        {
+            string ttstr = TestTrayId.ToString();
+            string flstr = FogLampId.ToString();
+            return "FL" + ttstr + flstr;
+        }
     }
 }
