@@ -29,7 +29,6 @@ namespace KanbanBoard
             dataGridView1.Columns[1].Name = "Passed";
             dataGridView1.Columns[2].Name = "Failed";
             dataGridView1.Columns[2].DefaultCellStyle.BackColor = Color.Red;
-
         }
 
 
