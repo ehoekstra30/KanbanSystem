@@ -27,7 +27,7 @@ namespace KanbanAndon
         }
 
         public List<Workstation> GetWorkstations() {
-
+            this.kdb.SaveChanges();
             return queryWorkstations.ToList();
         }
 
