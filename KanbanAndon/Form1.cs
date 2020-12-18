@@ -41,7 +41,8 @@ namespace KanbanAndon
             this.Text = "Kanban Andon Display";
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             run = false;
-
+            progressBar1.Minimum = 0;
+            progressBar1.Maximum = 5;
             int i = 1;
             while (i <= maxWorkStations) {
                     comboBox1.Items.Add(i).ToString();
@@ -74,8 +75,6 @@ namespace KanbanAndon
 
             run = true;
             int runner = 0;
-            progressBar1.Minimum = 0;
-            progressBar1.Maximum = 5;
             
             while (run == true)
             {
@@ -108,6 +107,7 @@ namespace KanbanAndon
                 {
                     if (comboBox1.SelectedIndex == (i))
                     {
+
                         dataGridView1.Rows.Add((i + 1).ToString(), workstation.HarnessAmount, workstation.ReflectorAmount,
                             workstation.HousingAmount, workstation.LensAmount, workstation.BulbAmount, workstation.BezelAmount);
                     }
